@@ -1,4 +1,4 @@
-# Godoversation
+# ![the Godoversation logo](./src/icon.svg) Godoversation
 
 > A DSL to describe conversations
 
@@ -66,3 +66,7 @@ The way Godoversation works is simple and inspired by the talk
 [Narrative Sorcery: Coherent Storytelling in an Open World](https://www.youtube.com/watch?v=HZft_U4Fc-U&t=544s) by Inkle's Jon Ingold at GDC 2017.
 
 Every function is a "node". Visiting the node increases it's `visit` count. To know if a player has encountered an event before, you can count the number of visits to a specific node. This system isn't confined to conversations either. A node can be any method, and do anything.
+
+To show how simple it is to add new functionality to this kind of code, there's an example of a simple parser for a text format too
+
+![the Godoversation GUI](./screenshot.png)
