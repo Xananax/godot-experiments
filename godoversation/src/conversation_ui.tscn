@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://d07jwgrexc5x8"]
+
+[ext_resource type="Script" uid="uid://cj3kesr17q0ak" path="res://conversation_ui.gd" id="1_ywt31"]
+
+[node name="ConversationUI" type="VBoxContainer" node_paths=PackedStringArray("_texts_container", "_buttons_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ywt31")
+_texts_container = NodePath("HBoxContainer/ScrollContainer/LinesVBoxContainer")
+_buttons_container = NodePath("HBoxContainer/ButtonsHBoxContainer")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ButtonStart" type="Button" parent="HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Meet Merchant"
+
+[node name="ButtonStartWolf" type="Button" parent="HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Meet the wolf"
+
+[node name="ButtonStartAct1" type="Button" parent="HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Act 1 (different story)"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LinesVBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ButtonsHBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Window" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Inventory"
+size = Vector2i(282, 100)
+dialog_text = "Pretend there's an inventory here"
+dialog_autowrap = true

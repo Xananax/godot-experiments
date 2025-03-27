@@ -1,0 +1,25 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*.import": true,
+        "**/*.uid": true,
+        "Godot_v4.4.1-stable_linux.x86_64": true,
+        "._sc_": true,
+        ".vscode": true,
+        "editor_data": true,
+        ".zed": true
+    },
+    "explorerExclude.backup": {},
+    "spellright.language": [
+        "en-US-10-1."
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ]
+}

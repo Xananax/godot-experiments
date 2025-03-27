@@ -1,0 +1,17 @@
+## Act 1
+
+Robert: Are you sure you want to do this?
+yes -> Act 2
+no -> Think
+
+## Think
+
+Tilia: Hmmmmm. I guess?
+Robert: Don't
+Robert: Really, don't
+I think I may -> Act 1
+No, I will -> Act 2
+
+## Act 2
+
+And so it starts
