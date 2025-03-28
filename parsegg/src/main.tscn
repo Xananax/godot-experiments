@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwvgrlgy8rjeh"]
+
+[ext_resource type="Texture2D" uid="uid://bc6767k88677b" path="res://icon.svg" id="1_827ap"]
+
+[sub_resource type="GDScript" id="GDScript_fxes3"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+
+func _physics_process(delta: float) -> void:
+
+	var direction := Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
+	velocity = direction * SPEED
+
+	move_and_slide()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_733gy"]
+radius = 55.9017
+
+[sub_resource type="GDScript" id="GDScript_a5gpg"]
+script/source = "extends CharacterBody2D
+
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@export var speed := 40
+
+var enemy_state := \"idle\"
+@onready var player: CharacterBody2D = null
+
+func _process(delta):
+	if player != null and enemy_state == \"pursue\":
+		ray_cast_2d.enabled = true
+		var player_local_position := player.global_position - ray_cast_2d.global_position
+		ray_cast_2d.target_position = player_local_position
+		if ray_cast_2d.is_colliding():
+			var obj: Node = ray_cast_2d.get_collider()
+			if obj.name == \"Player\":
+				print(\"seeing the player\")
+				sprite_2d.look_at(player.position)
+				velocity = global_position.direction_to(player.global_position) * speed
+				move_and_slide()
+			else:
+				print(\"not seeing the player\")
+
+
+func _on_area_2d_body_entered(body):
+	if body.name == \"Player\":
+		player = body
+		enemy_state = \"pursue\"
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btqx4"]
+radius = 63.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lf6a6"]
+radius = 292.554
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgrfb"]
+size = Vector2(128, 128)
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(873, 192)
+script = SubResource("GDScript_fxes3")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_827ap")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_733gy")
+
+[node name="Mob" type="CharacterBody2D" parent="."]
+position = Vector2(282, 152)
+collision_layer = 2
+script = SubResource("GDScript_a5gpg")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mob"]
+shape = SubResource("CircleShape2D_btqx4")
+
+[node name="RayCast2D" type="RayCast2D" parent="Mob"]
+target_position = Vector2(0, 500)
+
+[node name="Area2D" type="Area2D" parent="Mob"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mob/Area2D"]
+shape = SubResource("CircleShape2D_lf6a6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Mob"]
+modulate = Color(0.999941, 0.518172, 0.452228, 1)
+texture = ExtResource("1_827ap")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(569, 180)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+shape = SubResource("RectangleShape2D_tgrfb")
+debug_color = Color(0.895612, 0.194507, 0.628227, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_827ap")
+
+[connection signal="body_entered" from="Mob/Area2D" to="Mob" method="_on_area_2d_body_entered"]
