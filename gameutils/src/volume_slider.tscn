@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyqlvqf883vxo"]
+
+[ext_resource type="Script" uid="uid://b40h63lcrgfv2" path="res://test.gd" id="1_5ugwo"]
+[ext_resource type="Script" uid="uid://g6uvavxycdp5" path="res://remapper_button.gd" id="4_upjiq"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ugwo")
+
+[node name="RemapperButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 419.0
+offset_right = 285.0
+offset_bottom = 523.0
+script = ExtResource("4_upjiq")
+action_name = &"up"
+metadata/_custom_type_script = "uid://g6uvavxycdp5"
